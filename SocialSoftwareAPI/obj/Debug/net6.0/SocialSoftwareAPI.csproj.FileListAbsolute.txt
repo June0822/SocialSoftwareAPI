@@ -35,3 +35,16 @@ D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\runtimes\w
 D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
 D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Scrutor.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll

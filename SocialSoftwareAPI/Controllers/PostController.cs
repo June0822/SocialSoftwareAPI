@@ -4,11 +4,13 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 using SocialSoftwareAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SocialSoftwareAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PostController : ControllerBase
     {
         private readonly IConfiguration _configuration;
