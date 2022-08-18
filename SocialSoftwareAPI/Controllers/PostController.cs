@@ -10,7 +10,7 @@ namespace SocialSoftwareAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PostController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -23,7 +23,8 @@ namespace SocialSoftwareAPI.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select PostId, Title, Content from dbo.Posts";
+            string query = @"select PostId, Users.UserName, Content, CAST(CreateDate as date) as date, CAST(CreateDate as time(0)) as time, DATEDIFF(Hour, CreateDate, GETDATE()) as DateDiff from dbo.Posts
+                left join dbo.Users on Users.UserId = Posts.Owner";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("SocialSoftwareAppCon");
             SqlDataReader myReader;
@@ -47,8 +48,9 @@ namespace SocialSoftwareAPI.Controllers
         public JsonResult Post(Post post)
         {
             string query = @"insert into dbo.Posts values(
-                '" + post.Title + @"'
-                ,'" + post.Content + @"'
+                '" + post.Content + @"'
+                ,'" + post.Owner + @"'
+                ," + @" GETDATE()
                 )";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("SocialSoftwareAppCon");
@@ -73,8 +75,7 @@ namespace SocialSoftwareAPI.Controllers
         public JsonResult Put(Post post)
         {
             string query = @"update dbo.Posts set
-                Title = '" + post.Title + @"'
-                ,Content = '" + post.Content + @"'
+                Content = '" + post.Content + @"'
                 where PostId = '" + post.PostId + @"'";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("SocialSoftwareAppCon");

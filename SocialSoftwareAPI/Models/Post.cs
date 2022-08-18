@@ -9,12 +9,15 @@ namespace SocialSoftwareAPI.Models
 
         [Required]
 
-        public string Title { get; set; } = string.Empty;
+        public int Owner { get; set; } 
 
         [Required]
-        [MaxLength(length:100000)]
 
         public string Content { get; set; } = string.Empty;
+
+        public string CreateDate { get; set; } = string.Empty;
+
+        public string CreateTime { get; set; } = string.Empty;
 
     }
 }
