@@ -7,7 +7,6 @@ using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 //Enable CORS
 builder.Services.AddCors(c =>
 {

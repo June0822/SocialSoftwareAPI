@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Data.SqlClient;
 using System.Data;
+using System.Text;
 
 namespace SocialSoftwareAPI.Controllers
 {
@@ -49,7 +50,7 @@ namespace SocialSoftwareAPI.Controllers
         public async Task<ActionResult<string>> Login(UserDto request)
         {
             string query = @"select * from dbo.Users 
-            where (Users.UserName = '" + request.Username + @"')";
+            where (Users.UserName = '" + request.Username + @"' collate Chinese_PRC_CS_AI ) ";
 
             DataTable dt = GetDataFromDB(query);
 
@@ -59,14 +60,14 @@ namespace SocialSoftwareAPI.Controllers
             }
 
             byte[] passwordHash = (byte[]) dt.Rows[0]["PasswordHash"];
-            byte[] passwordSalt = (byte[])dt.Rows[0]["PasswordSalt"];
+            byte[] passwordSalt = (byte[]) dt.Rows[0]["PasswordSalt"];
 
             if (!VerifyPasswordHash(request.Password, passwordHash, passwordSalt))
             {
                 return BadRequest("Wrong password");
             }
 
-            string token = CreateToken(user);
+            string token = CreateToken(request);
             return Ok(token);
         }
 
@@ -124,11 +125,16 @@ namespace SocialSoftwareAPI.Controllers
             }
         }
 
-        private string CreateToken(User user)
+        private string CreateToken(UserDto user)
         {
-            List<Claim> claims = new List<Claim>()
+            //List<Claim> claims = new List<Claim>()
+            //{
+            //    new Claim(ClaimTypes.Name, user.Username)
+            //};
+
+            var claims = new Claim[]
             {
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim("name", user.Username)
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));

@@ -9,7 +9,7 @@ namespace SocialSoftwareAPI.Models
 
         [Required]
 
-        public int Owner { get; set; } 
+        public string Owner { get; set; } 
 
         [Required]
 
