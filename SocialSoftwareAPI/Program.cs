@@ -8,10 +8,23 @@ using Swashbuckle.AspNetCore.Filters;
 var builder = WebApplication.CreateBuilder(args);
 
 //Enable CORS
-builder.Services.AddCors(c =>
+//builder.Services.AddCors(c =>
+//{
+//    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+//});
+// ==>
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
 {
-    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("https://june0822.github.io",
+                              "http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                      });
 });
+
 
 // Add services to the container.
 
@@ -54,7 +67,7 @@ builder.Services.AddControllersWithViews()
 
 var app = builder.Build();
 
-app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+//app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -68,6 +81,10 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "img")),
     RequestPath = "/img"
 });
+
+app.UseRouting();
+
+app.UseCors(MyAllowSpecificOrigins);  //cors!!
 
 app.UseHttpsRedirection();
 
