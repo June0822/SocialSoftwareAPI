@@ -48,3 +48,5 @@ D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Microsoft.
 D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Scrutor.dll
 D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.dll
 D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\libman.json
+D:\program\repos\SocialSoftwareAPI\SocialSoftwareAPI\bin\Debug\net6.0\SocialSoftwareAPI.staticwebassets.runtime.json

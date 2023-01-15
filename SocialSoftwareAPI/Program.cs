@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using SocialSoftwareAPI.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,7 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("https://june0822.github.io",
-                              "http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                              "http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
                       });
 });
 
@@ -29,6 +30,9 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddSignalR();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options=>
@@ -93,5 +97,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

@@ -24,7 +24,7 @@ namespace SocialSoftwareAPI.Controllers
         {
             string Username = CommonFunctions.GetUser(Request.Headers["Authorization"]);
 
-            string query = @"select UserId, UserName, 'N' as isFollow from dbo.Users where UserName!= '" + Username + @"'";
+            string query = @"select UserId, UserName, 'N' as isFollow, ProfilePhotoSrc from dbo.Users where UserName!= '" + Username + @"'";
             DataTable AllUserTable = new DataTable();
             DataTable RelationTable = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("SocialSoftwareAppCon");
@@ -71,6 +71,35 @@ namespace SocialSoftwareAPI.Controllers
             return new JsonResult(AllUserTable);
         }
 
+        [Route("contact")]
+        [HttpGet]
+        public JsonResult GetContact()
+        {
+            string Username = CommonFunctions.GetUser(Request.Headers["Authorization"]);
+
+            string query = @"select Passive, tempUsers.UserName, tempUsers.ProfilePhotoSrc from UserFollowRelation 
+                left join Users on Active = UserId
+                left join Users as tempUsers on Passive = tempUsers.UserID
+                where Users.UserName = '" + Username + @"'";
+            DataTable ContactTable = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("SocialSoftwareAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    ContactTable.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(ContactTable);
+        }
+
         [HttpPost]
         public JsonResult Post(FollowRelation FollowRelation)
         {
@@ -104,5 +133,7 @@ namespace SocialSoftwareAPI.Controllers
 
             return new JsonResult("Action completed");
         }
+
+        
     }
 }

@@ -29,9 +29,12 @@ namespace SocialSoftwareAPI.Controllers
 
             int UserId = CommonFunctions.GetUserId(CommonFunctions.GetUser(Request.Headers["Authorization"]), sqlDataSource);
 
-            string query = @"select PostId, Users.UserName, Content, CAST(CreateDate as date) as date, CAST(CreateDate as time(0)) as time, DATEDIFF(Hour, CreateDate, GETDATE()) as DateDiff from dbo.Posts
+            string query = @"select Posts.PostId, Users.UserName, Content, CAST(CreateDate as date) as date, CAST(CreateDate as time(0)) as time, DATEDIFF(Hour, CreateDate, GETDATE()) as DateDiff, ProfilePhotoSrc 
+                , iif(FavoritePost.UserId is null, 'N' , 'Y' ) as isLiked, (select count(FavoritePost.UserId) from FavoritePost where FavoritePost.PostId = Posts.PostId) as LikeCount
+                from dbo.Posts
                 left join dbo.Users on Users.UserId = Posts.Owner
-                where (Posts.Owner = " + UserId + " or Posts.Owner in (select Passive from dbo.UserFollowRelation where Active = " + UserId + "))";
+                left join dbo.FavoritePost on FavoritePost.UserId = " + UserId + " and FavoritePost.PostId = Posts.PostId " +
+                " where (Posts.Owner = " + UserId + " or Posts.Owner in (select Passive from dbo.UserFollowRelation where Active = " + UserId + "))";
 
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
@@ -87,6 +90,42 @@ namespace SocialSoftwareAPI.Controllers
             }
 
             return new JsonResult("Added Successfully");
+        }
+
+        public class LikeModel
+        {
+            public int PostId { get; set; }
+            public string Action { get; set; } = "like";
+
+        }
+
+        [HttpPost("like")]
+        public void Like([FromBody] LikeModel likemodel) //Action -> like and cancel
+        {
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("SocialSoftwareAppCon");
+            SqlDataReader myReader;
+
+            int UserId = CommonFunctions.GetUserId(CommonFunctions.GetUser(Request.Headers["Authorization"]), sqlDataSource);
+
+            string query = "";
+
+            if (likemodel.Action == "like") query = "insert into dbo.FavoritePost values(" + likemodel.PostId + ", " + UserId + ")";
+            else query = "delete from dbo.FavoritePost where (PostId= " + likemodel.PostId + " and UserId= " + UserId + ")";
+
+
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
         }
 
         [HttpPut]
