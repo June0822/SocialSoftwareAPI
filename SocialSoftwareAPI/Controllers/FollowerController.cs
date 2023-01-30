@@ -80,7 +80,7 @@ namespace SocialSoftwareAPI.Controllers
             string query = @"select Passive, tempUsers.UserName, tempUsers.ProfilePhotoSrc from UserFollowRelation 
                 left join Users on Active = UserId
                 left join Users as tempUsers on Passive = tempUsers.UserID
-                where Users.UserName = '" + Username + @"'";
+                where Users.UserName = '" + Username + @"' and (select Count(*) from UserFollowRelation as temp where temp.Active = UserFollowRelation.Passive and temp.Passive = UserFollowRelation.Active) != 0 ";
             DataTable ContactTable = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("SocialSoftwareAppCon");
             SqlDataReader myReader;
