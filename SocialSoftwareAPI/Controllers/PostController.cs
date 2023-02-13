@@ -34,7 +34,7 @@ namespace SocialSoftwareAPI.Controllers
                 from dbo.Posts
                 left join dbo.Users on Users.UserId = Posts.Owner
                 left join dbo.FavoritePost on FavoritePost.UserId = " + UserId + " and FavoritePost.PostId = Posts.PostId " +
-                " where (Posts.Owner = " + UserId + " or Posts.Owner in (select Passive from dbo.UserFollowRelation where Active = " + UserId + "))";
+                " where (Posts.Owner = " + UserId + " or Posts.Owner in (select Passive from dbo.UserFollowRelation where Active = " + UserId + ")) order by CreateDate desc";
 
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
