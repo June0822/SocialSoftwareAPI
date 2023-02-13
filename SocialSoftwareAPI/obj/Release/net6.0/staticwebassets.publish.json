@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "Hash": "s0r9V1gCYmsykFnoYFYoSsdmtOG/u1vxFMKH0w9JBWc=",
+  "Source": "SocialSoftwareAPI",
+  "BasePath": "_content/SocialSoftwareAPI",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "SocialSoftwareAPI\\wwwroot",
+      "Source": "SocialSoftwareAPI",
+      "ContentRoot": "D:\\program\\repos\\SocialSoftwareAPI\\SocialSoftwareAPI\\wwwroot\\",
+      "BasePath": "_content/SocialSoftwareAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\program\\repos\\SocialSoftwareAPI\\SocialSoftwareAPI\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",
+      "SourceId": "SocialSoftwareAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\program\\repos\\SocialSoftwareAPI\\SocialSoftwareAPI\\wwwroot\\",
+      "BasePath": "_content/SocialSoftwareAPI",
+      "RelativePath": "js/signalr/dist/browser/signalr.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\signalr\\dist\\browser\\signalr.js"
+    },
+    {
+      "Identity": "D:\\program\\repos\\SocialSoftwareAPI\\SocialSoftwareAPI\\wwwroot\\js\\signalr\\dist\\browser\\signalr.min.js",
+      "SourceId": "SocialSoftwareAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\program\\repos\\SocialSoftwareAPI\\SocialSoftwareAPI\\wwwroot\\",
+      "BasePath": "_content/SocialSoftwareAPI",
+      "RelativePath": "js/signalr/dist/browser/signalr.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\signalr\\dist\\browser\\signalr.min.js"
+    }
+  ]
+}
